@@ -1,1 +1,6 @@
-# mechasolution_platform
+## 메카솔루션 플랫폼
+
+### 주제 : 인플루언서 마케팅 플랫폼 구축
+
+### 참여인원 : Aaron(김민규) Andrew(김동환) Paul(김민혁)
+
