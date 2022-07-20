@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>search</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/메카솔루션 로고 미니.png" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/메카솔루션 로고 미니.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
+                        Mecha Solution
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="index.html">홈</a></li>
+                            <li class="nav-item"><a class="nav-link" href="ranking.html">인플루언서 랭킹</a></li>
+                            <li class="nav-item"><a class="nav-link" href="search.html">인플루언서 검색</a></li>
+                            <li class="nav-item"><a class="nav-link" href="interest.html">내 관심 인플루언서</a></li>
+                            <li class="nav-item"><a class="nav-link" href="login.html">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" href="signup.html">회원가입</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+            <header class="bg-light py-5">
+                <div class="container px-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xxl-6">
+                            <div class="text-center my-5">
+                                <h4 class="fw-bolder mb-3">필터를 이용하여 원하는 인플루언서를 검색해보세요</h4>
+                            </div>
+                                <div class="container">
+
+                                    <div class="row">
+                                        <div class="col">팔로워수</div>
+                                        <div class="col">카테고리</div>
+                                        <div class="col">오디언스 언어</div>
+                                        <div class="col">계정 타입</div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col">
+                                        <div class="btn-group">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; color: black;">
+                                            팔로워 수
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="#">팔로워 수</a></li>
+                                            <li><a class="dropdown-item" href="#">1 ~ 10k</a></li>
+                                            <li><a class="dropdown-item" href="#">10 ~ 50k</a></li>
+                                            <li><a class="dropdown-item" href="#">50 ~ 100k</a></li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                      <div class="col">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; color: black;">
+                                            카테고리
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">모든 카테고리</a></li>
+                                            <li><a class="dropdown-item" href="#">캠핑</a></li>
+                                            <li><a class="dropdown-item" href="#">헬스</a></li>
+                                            <li><a class="dropdown-item" href="#">IT</a></li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                      <div class="col">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="background-color: transparent; color: black;">
+                                            모든 언어
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                            <li><a class="dropdown-item" href="#">모든 언어</a></li>
+                                            <li><a class="dropdown-item" href="#">한국어</a></li>
+                                            <li><a class="dropdown-item" href="#">영어</a></li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                      <div class="col">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" style="background-color: transparent; color: black;">
+                                            모든 타입
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                            <li><a class="dropdown-item" href="#">모든 타입</a></li>
+                                            <li><a class="dropdown-item" href="#">일반 계정</a></li>
+                                            <li><a class="dropdown-item" href="#">비즈니스 계정</a></li>
+                                            </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col">포함 키워드</div>
+                                        <div class="col">정렬</div>
+                                        <div class="col"></div>
+                                        <div class="col"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="포함 텍스트" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; color: black;">
+                                                기본순
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">기본순</a></li>
+                                                <li><a class="dropdown-item" href="#">팔로워 높은순</a></li>
+                                                <li><a class="dropdown-item" href="#">ER지수 높은순</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-primary" type="button">필터 적용</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 인플루언서 리스트 -->
+            <section class="bg-light py-5">
+                <div class="container px-5 my-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">인플루언서</th>
+                            <th scope="col">카테고리</th>
+                            <th scope="col">팔로워 수</th>
+                            <th scope="col">영향력</th>
+                            <th scope="col">인플루언서 관리</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>
+                                <a type="text" href="userinfo.html">
+                                    아이유
+                                </a>
+                                </td>
+                            <td>연예</td>
+                            <td>15,648,228</td>
+                            <td>533,512</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm">폴더 담기</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>
+                                <a type="text" href="userinfo.html">
+                                    홍길동
+                                </a>
+                                </td>
+                            <td>역사</td>
+                            <td>964,228</td>
+                            <td>315,495</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm">폴더 담기</button>
+                            </td>
+                        </tr>                        <tr>
+                            <th scope="row">3</th>
+                            <td>
+                                <a type="text" href="userinfo.html">
+                                    치킨
+                                </a>
+                                </td>
+                            <td>음식</td>
+                            <td>658,933</td>
+                            <td>263,194</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm">폴더 담기</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; (주)메카솔루션</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
