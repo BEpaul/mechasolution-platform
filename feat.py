@@ -7,15 +7,19 @@ import requests
 import json
 import pandas as pd
 import time
-import pymysql
-from sqlalchemy import create_engine
 from tqdm import tqdm
+import multiprocessing
+import pymysql
+from sqlalchemy import create_engine 
 
 #계정이름을 담을 리스트
 user_name_list = []
+keyword_list = []
 
 #계정 정보를 담을 리스트
-user_info_list = []
+raw_info_list = []
+
+processed_info_list = []
 
 #피쳐링에서 분석되지 않은 계정이름을 담을 리스트
 #not_analized_users = []
@@ -69,7 +73,8 @@ class Featuring:
 
     #키워드로 검색 후 해당 키워드에 있는 계정 수를 반환
     def get_list_size(self, keyword):
-
+        print("initiating..")
+        
         url = "https://featuring.co/report/search/api/?q=" + keyword + "&page=0"
 
         r = self.sess.get(url)
@@ -98,6 +103,7 @@ class Featuring:
                 try:
                     json_username = user["userinfo"]["username"]
                     user_name_list.append(json_username)
+                    keyword_list.append(keyword)
                 #유튜브 계정일시 발생하는 키에러 제외
                 except KeyError:
                     pass
@@ -113,7 +119,8 @@ class Featuring:
         #    user = user_name_list[k]
         for user in tqdm(user_name_list, desc="getting user info"):
             try:
-                user_info = []
+                raw_info = []
+                processed_info = []
 
                 #피쳐링에서 각각의 정보가 서로 다른 url에서 나타나기 때문에 각각의 url에 대해 json 불러오기
                 audience_url = "https://featuring.co/report/eg/" + user + "/audience_quality?is_engine_request=true"
@@ -137,21 +144,26 @@ class Featuring:
                 json_follower = realreach_r.json()["json_parameter"]["follower_count"]
                 json_avg_like = realreach_r.json()["json_parameter"]["avg_like_count"]
 
-                user_info.append(json_audience_qual)
-                user_info.append(json_featuring_score)
-                user_info.append(json_real_comment)
-                user_info.append(json_real_like)
-                user_info.append(json_real_influence)
-                user_info.append(json_real_reach)
-                user_info.append(json_follower)
-                user_info.append(json_avg_like)
+                processed_info.append(json_audience_qual)
+                processed_info.append(json_featuring_score)
+                processed_info.append(json_real_comment)
+                processed_info.append(json_real_like)
+                processed_info.append(json_real_influence)
+                processed_info.append(json_real_reach)
+                raw_info.append(json_follower)
+                raw_info.append(json_avg_like)
 
-                user_info_list.append(user_info)
+                raw_info_list.append(raw_info)
+                processed_info_list.append(processed_info)
                 #print(user_info)
             except json.JSONDecodeError:
-                for i in range(8):
-                    user_info.append(NaN)
-                user_info_list.append(user_info)
+                for i in range(6):
+                    processed_info.append(NaN)
+                for j in range(2):
+                    raw_info.append(NaN)
+                
+                raw_info_list.append(raw_info)
+                processed_info_list.append(processed_info)
                 pass
 
             #print(user_info)
@@ -160,46 +172,115 @@ class Featuring:
 
 
 
-username = ""
-password = ""
+
+
+username = "roboholic84@gmail.com"
+password = "mecha@1234"
 
 featuring = Featuring()
 featuring.login(username, password)
 
-keyword = input("Enter Keyword: ")
+while(True):
+    user_name_list = []
+    keyword_list = []
+    raw_info_list = []
+    processed_info_list = []
 
-list_size = featuring.get_list_size(keyword)
+    keyword = input("Enter Keyword: ")
 
-featuring.get_user_names(list_size, keyword)
-#print(user_name_list)
+    if keyword == "quit":
+        break
 
-featuring.get_user_info()
-#print(user_info_list)
+    list_size = featuring.get_list_size(keyword)
 
-_column = ['오디언스 퀄리티', '피쳐링스코어', '진짜 댓글수', '진짜 좋아요수', '진짜 영향력', '진짜 도달', '팔로워', '평균 좋아요']
-df = pd.DataFrame(user_info_list, columns = _column)
+    featuring.get_user_names(list_size, keyword)
+    #print(user_name_list)
 
-print(len(user_name_list))
-print(len(user_info_list))
+    featuring.get_user_info()
+    #print(user_info_list)
 
-#test_list = user_name_list[0:10]
-#df.insert(0, "username", test_list, True)
-df.insert(0, "username", user_name_list, True)
-print(df)
+    _column_user = ['Username']
+    df_user = pd.DataFrame(user_name_list, columns=_column_user)
+    df_user.insert(0, "Keyword", keyword_list, True)
+    print(df_user)
 
-df.dropna(inplace=True)
+    _column_raw = ['Followers', 'Avg_Likes']
+    df_raw = pd.DataFrame(raw_info_list, columns = _column_raw)
+    print(df_raw)
 
-engine = create_engine("mysql+pymysql://root:password@127.0.0.1:3306/testdb?charset=utf8")
+    _column_processed = ['Audience_Quality', 'Featuring_Score', 'Real_Comment_Rate', 'Real_Like_Rate', 'Real_Influence', 'Real_Reach']
+    df_processed = pd.DataFrame(processed_info_list, columns= _column_processed)
+    print(df_processed)
 
-conn = engine.connect()
 
-#cursor = conn.cursor()
+    print(len(user_name_list))
+    print(len(raw_info_list))
 
-#db.commit()
+        #test_list = user_name_list[0:10]
+        #df.insert(0, "username", test_list, True)
+        #df.insert(0, "username", user_name_list, True)
+        #print(df)
 
-df.to_sql(name='feat', con=conn, if_exists='append',index=False)
+    df_user.dropna(inplace=True)
 
-print("Added to database.")
+    engine = create_engine("mysql+pymysql://admin:" + "apzk1234" + "@database-1.crjx3ubi7qng.ap-northeast-2.rds.amazonaws.com:3306/" + "featdb?charset=utf8")
 
-#db.commit()
-#db.close()
+    conn = engine.connect()
+
+    #cursor = conn.cursor()
+
+        #db.commit()
+
+    df_user.to_sql(name='Keyword', con=conn, if_exists='append',index=False)
+
+    print("Added to database.")
+
+        #db.commit()
+        #db.close()
+
+
+
+'''while(True):
+    user_name_list = []
+    user_info_list = []
+
+    keyword = input("Enter Keyword: ")
+
+    if keyword == "quit":
+        break
+
+    list_size = featuring.get_list_size(keyword)
+
+    featuring.get_user_names(list_size, keyword)
+    #print(user_name_list)
+
+    featuring.get_user_info()
+    #print(user_info_list)
+
+    _column = ['Audience_Quality', 'Featuring_Score', 'Real_Comment_Rate', 'Real_Like_Rate', 'Real_Influence', 'Real_Reach', 'Followers', 'Avg_Likes']
+    df1 = pd.DataFrame(user_info_list, columns = _column)
+
+    print(len(user_name_list))
+    print(len(user_info_list))
+
+    #test_list = user_name_list[0:10]
+    #df.insert(0, "username", test_list, True)
+    df1.insert(0, "username", user_name_list, True)
+    print(df)
+
+    df1.dropna(inplace=True)
+
+    engine = create_engine("mysql+pymysql://admin:" + "apzk1234" + "@database-1.crjx3ubi7qng.ap-northeast-2.rds.amazonaws.com:3306/" + "testdb?charset=utf8")
+
+    conn = engine.connect()
+
+    #cursor = conn.cursor()
+
+    #db.commit()
+
+    df.to_sql(name='featuring', con=conn, if_exists='append',index=False)
+
+    print("Added to database.")
+
+    #db.commit()
+    #db.close()'''
