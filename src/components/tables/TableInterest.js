@@ -1,5 +1,10 @@
-import { Space, Table, Button } from 'antd';
+import { Button } from 'antd';
+import { Space, Table } from 'antd';
 import React from 'react';
+
+const loginCheck = () => {
+
+}
 const columns = [
   {
     title: '인플루언서',
@@ -23,17 +28,17 @@ const columns = [
     dataIndex: 'power',
   },
   {
-    title: '인플루언서 관리',
+    title: '인플루언서 연결',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
         <div></div>
-        <Button type='primary'>저장하기</Button>
+        <Button type='primary' >DM</Button>
       </Space>
     ),
   },
 ];
 
-const App = (props) => <Table style={{ textAlign: 'center'}} columns={columns} dataSource={props.data} />;
+const App = (props) => <Table columns={columns} dataSource={props.data} style={{width: 800}} />;
 
 export default App;

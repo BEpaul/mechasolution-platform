@@ -1,5 +1,5 @@
 import React from 'react'
-import TableInterest from '../../components/commons/TableInterest'
+import TableInterest from '../../components/tables/TableInterest'
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
 import { dummyDataObject } from '../../assets/dummyDataObject';
@@ -20,7 +20,6 @@ function InterestPage() {
           </MainHeader>
         </Header>
       </Container>
-
     </div>
   )
 }

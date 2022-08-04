@@ -9,7 +9,7 @@ export const Body = styled.section`
     background-color: white;
     position: relative; // 다른 엘리먼트들과 겹치지 않도록
     display: flex; 
-    justify-content: first baseline; // display를 flex로 해주었기 때문에 justify-content center 가능
+    justify-content: 'center'; // display를 flex로 해주었기 때문에 justify-content center 가능
     padding: 10px 0 0 30px;
     /* &::before {
         content: '';

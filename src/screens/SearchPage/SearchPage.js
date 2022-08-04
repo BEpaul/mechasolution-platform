@@ -3,7 +3,7 @@ import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
 import SelectBox from '../../components/commons/SelectBox';
 import { Button } from 'antd';
-import TableSearch from '../../components/commons/TableSearch'
+import TableSearch from '../../components/tables/TableSearch'
 import { dummyDataObject } from '../../assets/dummyDataObject';
 
 function SearchPage() {
@@ -35,7 +35,7 @@ function SearchPage() {
           <div style={{textAlign: 'center'}}>
             <h3>필터를 이용해서 원하는 인플루언서를 검색해보세요.</h3>
           </div>
-          <div style={{ padding: 40, display: 'flex', alignContent: 'center'}}>
+          <div style={{ padding: 40, textAlign: 'center'}}>
             <SelectBox
               defaultValue='팔로워 수'
               option1='0 ~ 10k'

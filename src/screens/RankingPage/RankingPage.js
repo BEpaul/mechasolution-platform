@@ -1,5 +1,5 @@
-import TableCategoryRanking from '../../components/commons/TableCategoryRanking';
-import TableSearch from '../../components/commons/TableSearch';
+import TableCategoryRanking from '../../components/tables/TableCategoryRanking';
+import TableSearch from '../../components/tables/TableSearch';
 import React, { useState } from 'react';
 import GridCards from '../../components/commons/GridCards';
 import { Container } from '../../components/styles/container/Container';

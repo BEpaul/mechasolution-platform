@@ -12,6 +12,7 @@ import RankingPage from './screens/RankingPage/RankingPage';
 import LoginPage from './screens/LoginPage/LoginPage';
 import RegisterPage from './screens/RegisterPage/RegisterPage';
 import SearchPage from './screens/SearchPage/SearchPage';
+import InfluencerDetailPage from './screens/InfluencerDetailPage/InfluencerDetailPage';
 import NavBar from './components/views/NavBar/NavBar';
 import Footer from './components/views/Footer/Footer';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/search" element = {<SearchPage />} />
           <Route exact path="/login" element = {<LoginPage />} />
           <Route exact path="/register" element = {<RegisterPage />} />
+          <Route exact path="/influencer" element = {<InfluencerDetailPage />} />
         </Routes>
       </div>
       <Footer />
