@@ -45,16 +45,16 @@ function RegisterPage() {
       <form style={{ display: 'flex', flexDirection: 'column' }}
         onSubmit={onSubmitHandler}
       >
-        <label>Email</label>
+        <label>이메일</label>
         <input type="email" value={Email} onChange={onEmailHandler} />
 
-        <label>Name</label>
+        <label>이름</label>
         <input type="text" value={Name} onChange={onNameHandler}></input>
 
-        <label>Password</label>
+        <label>비밀번호</label>
         <input type="password" value={Password} onChange={onPasswordHandler} />
 
-        <label>Confirm Password</label>
+        <label>비밀번호 확인</label>
         <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
 
         <br />

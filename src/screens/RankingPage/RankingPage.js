@@ -5,15 +5,24 @@ import GridCards from '../../components/commons/GridCards';
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
 import { Body, MainBody } from '../../components/styles/body/Body.styled';
-import { dummyDataObject } from '../../assets/dummyDataObject';
 import { Button, Col, Row } from 'antd';
-
-import axios from 'axios';
+import APICollection from '../../api/APICollection';
 
 function RankingPage() {
 
+  let APICol = new APICollection(); 
+
   const [Keyword, setKeyword] = useState('');
 
+  // 랭킹 검색 데이터
+  const [data, setData] = useState([]);
+
+  // 캠핑 카테고리 데이터
+  const [campingData, setCampingData] = useState([])
+
+  // 골프 카테고리 데이터 데이터
+  const [golfData, setGolfData] = useState([])
+  
   const onKeywordHandler = (event) => {
     setKeyword(event.target.value);
   }
@@ -22,40 +31,15 @@ function RankingPage() {
   
   const onClickHandler = (event) => {
     event.preventDefault();
+
+    APICol.SearchTest().then((response) => {
+      setData(response.data);
+    });
+
     setvisible(true);
     console.log('입력값', Keyword)
 
-    // 해시태그 && 키워드 검색 api
-    axios.get(`/api/v1/influencerList/search/${Keyword}`)
-    .then(response => {
-      if(response.data){
-
-      } else {
-
-      }
-    })
   }
-
-  // 인스타그램 캠핑, 골프 카테고리 순위 api
-
-  axios.get(`/api/v1/influencerList/camping`)
-  .then(response => {
-    if(response.data){
-
-    } else {
-
-    }
-  })
-
-  axios.get(`/api/v1/influencerList/golf`)
-  .then(response => {
-    if(response.data){
-
-    } else {
-
-    }
-  })
-
 
   return (
     <Container>
@@ -71,27 +55,20 @@ function RankingPage() {
           </div>
           <br />
           {/* 각 카테고리별 인플루언서 랭킹 그리드뷰 */}
-          {visible && <TableSearch data={dummyDataObject} />}
-          <div>
-
-          </div>
+          {visible && <TableSearch data={data} />}
         </MainHeader>
       </Header>
       <Body>
         <MainBody>
-        <Body>
-        <MainBody>
           <Row>
             <Col span={11}>
-              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={dummyDataObject}/>}/>
+              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={data}/>}/>
             </Col>
             <Col span={2} />
             <Col span={11}>
-            <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={dummyDataObject}/>}/>
+            <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={data}/>}/>
             </Col>
           </Row>
-        </MainBody>
-      </Body>
         </MainBody>
       </Body>
     </Container>

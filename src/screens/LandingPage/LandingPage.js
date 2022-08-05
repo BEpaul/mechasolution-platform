@@ -1,34 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
 import TableInterest from '../../components/tables/TableInterest';
 import { Button } from 'antd';
 import APICollection from '../../api/APICollection';
+import ImageBox from '../../components/commons/ImageBox'
 
 function LandingPage() {
 
-  let APICol = new APICollection(); 
+  let APICol = new APICollection();
+  const navigate = useNavigate();
+
   const [influencerName, setInfluencerName] = useState('');
 
   const onInfluencerNameHandler = (event) => {
     setInfluencerName(event.target.value);
   }
 
-  // 숨기기 보이기
-  const [visible, setvisible] = useState(false)
-  
   // api 데이터
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
 
-  const onClickHandler = async (event) => {
+  const onClickHandler = (event) => {
     event.preventDefault();
     console.log('입력값', influencerName);
 
-    APICol.SearchName(influencerName).then((value) => {
-      setData(value.data);
+    navigate('/influencer', {
+      state : {
+        influencerName: influencerName,
+      },
     });
-
-    setvisible(true);
   }
 
   return (
@@ -49,9 +50,10 @@ function LandingPage() {
             </form>
           </div>
           <br />
-          <div>
-            {visible && <TableInterest data={data} isLoginCheck={true} />}
-          </div>
+          {/* <div> */}
+          <ImageBox />
+          {/* {visible && <TableInterest data={data} isLoginCheck={true} />} */}
+          {/* </div> */}
         </MainHeader>
       </Header>
     </Container>
