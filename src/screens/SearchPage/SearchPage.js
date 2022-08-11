@@ -1,31 +1,44 @@
+import TableCategoryRanking from '../../components/tables/TableCategoryRanking';
+import TableSearch from '../../components/tables/TableSearch';
 import React, { useState } from 'react';
+import GridCards from '../../components/commons/GridCards';
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
-import SelectBox from '../../components/commons/SelectBox';
-import { Button } from 'antd';
-import TableSearch from '../../components/tables/TableSearch'
-import { dummyDataObject } from '../../assets/dummyDataObject';
+import { Body, MainBody } from '../../components/styles/body/Body.styled';
+import { Button, Col, Row } from 'antd';
+import APICollection from '../../api/APICollection';
 
-function SearchPage() {
+function RankingPage() {
 
-  const [OptionFollowerValue, setOptionFollowerValue] = useState('')
-  const [OptionCategoryValue, setOptionCategoryValue] = useState('')
+  let APICol = new APICollection(); 
 
-  const handleFollowerChange = (value) => {
-    console.log(`selected ${value}`);
-    setOptionFollowerValue(value);
-  };
+  const [Keyword, setKeyword] = useState('');
 
-  const handleCategoryChange = (value) => {
-    console.log(`selected ${value}`);
-    setOptionCategoryValue(value);
+  // 랭킹 검색 데이터
+  const [data, setData] = useState([]);
+
+  // 캠핑 카테고리 데이터
+  const [campingData, setCampingData] = useState([])
+
+  // 골프 카테고리 데이터 데이터
+  const [golfData, setGolfData] = useState([])
+  
+  const onKeywordHandler = (event) => {
+    setKeyword(event.target.value);
   }
 
-
+  const [visible, setvisible] = useState(false);
+  
   const onClickHandler = (event) => {
     event.preventDefault();
-    console.log("팔로워 옵션", OptionFollowerValue);
-    console.log("카테고리 옵션", OptionCategoryValue);
+
+    APICol.SearchTest().then((response) => {
+      setData(response.data);
+    });
+
+    setvisible(true);
+    console.log('입력값', Keyword)
+
   }
 
   return (
@@ -33,44 +46,33 @@ function SearchPage() {
       <Header>
         <MainHeader>
           <div style={{textAlign: 'center'}}>
-            <h3>필터를 이용해서 원하는 인플루언서를 검색해보세요.</h3>
+            <h3>랭킹을 확인하고자 하는 계정을 검색해보세요!</h3>
+            <br />
+            <form style={{ display: 'flex', justifyContent: 'center' }}>
+              <input type="text" style={{ width: 500, height: 40}} value={Keyword} placeholder="해시태그 및 키워드를 검색하세요." onChange={onKeywordHandler} />
+              <Button type='primary' onClick={onClickHandler} style={{ height: 40 }} >검색</Button>
+            </form>
           </div>
-          <div style={{ padding: 40, textAlign: 'center'}}>
-            <SelectBox
-              defaultValue='팔로워 수'
-              option1='0 ~ 10k'
-              option2='10k ~ 50k'
-              option3='50k ~ 100k'
-              onChange={handleFollowerChange}
-            />
-            <SelectBox
-              defaultValue='카테고리'
-              option1='연예'
-              option2='역사'
-              option3='음식'
-              onChange={handleCategoryChange}
-            />
-
-            <Button
-              type='primary'
-              style={{
-                margin: 20,
-                width: 120
-              }}
-              onClick={onClickHandler}
-            >
-              필터링 적용
-            </Button>
-          </div>
-
-          <div>
-            <TableSearch data={dummyDataObject} />
-          </div>
+          <br />
+          {/* 각 카테고리별 인플루언서 랭킹 그리드뷰 */}
+          {visible && <TableSearch data={data} />}
         </MainHeader>
-
       </Header>
+      <Body>
+        <MainBody>
+          <Row>
+            <Col span={11}>
+              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={data}/>}/>
+            </Col>
+            <Col span={2} />
+            <Col span={11}>
+            <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={data}/>}/>
+            </Col>
+          </Row>
+        </MainBody>
+      </Body>
     </Container>
   )
 }
 
-export default SearchPage
+export default RankingPage

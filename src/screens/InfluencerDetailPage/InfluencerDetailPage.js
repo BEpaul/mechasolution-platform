@@ -24,16 +24,15 @@ function InfluencerDetailPage() {
   console.log('받은 인플루언서 이름', influencerName);
   
   useEffect(() => {
+      // 전달 받은 입력값으로 서버에 요청
     APICol.SearchName(influencerName).then((response) => {
       console.log(response.data);
       setData(response.data)
     })
   }, [])
+
+
   
-
-  // 전달 받은 입력값으로 서버에 요청
-
-
   return (
     <Container>
       <Header>
