@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# folder
+/trash
+
+
 # production
 /build
 

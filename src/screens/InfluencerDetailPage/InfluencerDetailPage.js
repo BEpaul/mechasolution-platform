@@ -38,12 +38,11 @@ function InfluencerDetailPage() {
         <MainHeader>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Avatar size={90} icon={<UserOutlined />} />
-            <h4 style={{ padding: 20 }}>{data.influencer}의 분석리포트</h4>
+            <h4 style={{ padding: 20 }}>{data.Username}의 분석리포트</h4>
           </div>
           <br />
-          <h5>카테고리: {data.category}</h5>
-          <h5>팔로워: {data.follower}</h5>
-          <h5>영향력: {data.power}</h5>
+          <h5>팔로워: {data.Followers}</h5>
+          <h5>영향력: {data.Real_Influence}</h5>
           <br />
           <Row>
             <Col>

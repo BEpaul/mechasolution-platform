@@ -10,7 +10,7 @@ import APICollection from '../../api/APICollection';
 
 function RankingPage() {
 
-  let APICol = new APICollection(); 
+  let APICol = new APICollection();
 
   const [Keyword, setKeyword] = useState('');
 
@@ -22,22 +22,25 @@ function RankingPage() {
 
   // 골프 카테고리 데이터 데이터
   const [golfData, setGolfData] = useState([])
-  
+
   const onKeywordHandler = (event) => {
     setKeyword(event.target.value);
   }
 
   const [visible, setvisible] = useState(false);
-  
+
   const onClickHandler = (event) => {
     event.preventDefault();
-
-    APICol.SearchTest().then((response) => {
-      setData(response.data);
-    });
-
-    setvisible(true);
     console.log('입력값', Keyword)
+
+    // 해시태그 및 키워드 검색
+    APICol.SearchKeyword(Keyword).then((response) => {
+      console.log(response.data)
+      setData(response.data);
+      setvisible(true);
+    }).catch(error => {
+      console(error.response)
+    });
 
   }
 
@@ -45,11 +48,11 @@ function RankingPage() {
     <Container>
       <Header>
         <MainHeader>
-          <div style={{textAlign: 'center'}}>
-            <h3>랭킹을 확인하고자 하는 계정을 검색해보세요!</h3>
+          <div style={{ textAlign: 'center' }}>
+            <h3>관심있는 분야나 키워드를 검색해보세요!</h3>
             <br />
             <form style={{ display: 'flex', justifyContent: 'center' }}>
-              <input type="text" style={{ width: 500, height: 40}} value={Keyword} placeholder="해시태그 및 키워드를 검색하세요." onChange={onKeywordHandler} />
+              <input type="text" style={{ width: 500, height: 40 }} value={Keyword} placeholder="해시태그 및 키워드를 검색하세요." onChange={onKeywordHandler} />
               <Button type='primary' onClick={onClickHandler} style={{ height: 40 }} >검색</Button>
             </form>
           </div>
@@ -62,11 +65,11 @@ function RankingPage() {
         <MainBody>
           <Row>
             <Col span={11}>
-              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={data}/>}/>
+              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={data} />} />
             </Col>
             <Col span={2} />
             <Col span={11}>
-            <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={data}/>}/>
+              <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={data} />} />
             </Col>
           </Row>
         </MainBody>

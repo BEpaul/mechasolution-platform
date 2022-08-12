@@ -10,6 +10,7 @@ import ImageBox from '../../components/commons/ImageBox'
 function LandingPage() {
 
   let APICol = new APICollection();
+
   const navigate = useNavigate();
 
   const [influencerName, setInfluencerName] = useState('');
@@ -38,6 +39,7 @@ function LandingPage() {
         <MainHeader>
           <div style={{ textAlign: 'center' }}>
             <h3>안녕하세요, 인플루언서를 위한 공간입니다.</h3>
+            <h4>원하는 계정명을 검색해 확인해보세요!</h4>
           </div>
           <br />
           <div>
