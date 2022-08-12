@@ -31,7 +31,6 @@ function InfluencerDetailPage() {
     })
   }, [])
 
-
   
   return (
     <Container>

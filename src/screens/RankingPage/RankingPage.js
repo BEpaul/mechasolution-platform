@@ -36,7 +36,7 @@ function SearchPage() {
           <div style={{textAlign: 'center'}}>
             <h3>필터를 이용해서 인플루언서의 순위를 확인해보세요.</h3>
           </div>
-          <div style={{ padding: 40, textAlign: 'center'}}>
+          <div style={{ padding: 15, textAlign: 'center'}}>
             <SelectBox
               defaultValue='팔로워 수'
               option1='0 ~ 10k'

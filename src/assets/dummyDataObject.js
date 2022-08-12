@@ -20,5 +20,19 @@ export const dummyDataObject = [
       power: "285,873",
       follower: "891,024",
     },
+    {
+      key: '4',
+      influencer: '호호',
+      category: "식당",
+      power: "280",
+      follower: "8,424",
+    },
+    {
+      key: '5',
+      influencer: '무무',
+      category: "게임",
+      power: "24,843",
+      follower: "19,124",
+    },
       
   ];

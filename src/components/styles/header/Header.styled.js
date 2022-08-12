@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Header = styled.section`
     width: 100%;
-    height: 70vh;
+    height: 75vh;
     color: black;
     /* background-color: #282c34; // 오묘한 예쁜 컬러 */
     background-color: #e4eeff;

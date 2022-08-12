@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Body = styled.section`
     width: 100%;
-    height: 50vh;
+    height: 70vh;
     color: black;
     /* background-color: #282c34; // 오묘한 예쁜 컬러 */
     background-color: white;

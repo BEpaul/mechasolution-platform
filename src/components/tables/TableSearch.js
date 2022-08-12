@@ -28,7 +28,7 @@ const columns = [
     render: (_, record) => (
       <Space size="middle">
         <div></div>
-        <Button type='primary'>저장하기</Button>
+        <Button type='primary' key={columns[0].key}>저장하기</Button>
       </Space>
     ),
   },

@@ -8,6 +8,7 @@ const App = (props) => (
       extra={<a href="#">More</a>}
       style={{
         width: 750,
+        height: 500
       }}
     >
       <p>{props.content}</p>

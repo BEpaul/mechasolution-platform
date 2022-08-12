@@ -10,7 +10,7 @@ function InterestPage() {
       <Container>
         <Header>
           <MainHeader>
-              <div style={{textAlign: 'center'}}>
+              <div style={{padding: 10, textAlign: 'center'}}>
                 <h3>관심있는 인플루언서를 관리할 수 있습니다.</h3>
               </div>
               <br />
