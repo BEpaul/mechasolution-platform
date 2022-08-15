@@ -30,7 +30,7 @@ class db_helper:
 
     def influencer_rank_query(self):
         infuencer_rank = feat_session.query(
-            func.rank().over(order_by=ProcessedInfoTable.Real_Influence.desc()).label('rank'),
+            func.rank().over(order_by=ProcessedInfoTable.Real_Influence.desc()).label('Rank'),
             ProcessedInfoTable.Username
         ).all()
 
@@ -52,25 +52,6 @@ class db_helper:
 
         return all_data
 
-    def category_list_query(self, category):
-
-        category_list = feat_session.query(
-            CategoryTable.Category,
-            RawInfoTable.Username,
-            RawInfoTable.Followers,
-            ProcessedInfoTable.Real_Influence
-        ).outerjoin(
-            ProcessedInfoTable,
-            ProcessedInfoTable.Username == RawInfoTable.Username
-        ).outerjoin(
-            CategoryTable,
-            CategoryTable.CategoryID == RawInfoTable.CategoryID
-        ).filter(RawInfoTable.CategoryID == category).order_by(
-            ProcessedInfoTable.Real_Influence.desc()
-        ).limit(5).all()
-
-        return category_list
-
     def user_query(self, influencer_id):
         user = feat_session.query(
             RawInfoTable.Username,
@@ -85,7 +66,7 @@ class db_helper:
 
     def keyword_list_query(self, keyword):
         keyword_list = feat_session.query(
-            func.rank().over(order_by=ProcessedInfoTable.Real_Influence.desc()).label('rank'),
+            func.rank().over(order_by=ProcessedInfoTable.Real_Influence.desc()).label('Rank'),
             RawInfoTable.Username,
             KeywordTable.Keyword,
             RawInfoTable.Followers,
@@ -99,3 +80,31 @@ class db_helper:
         ).filter(KeywordTable.Keyword.like('%' + keyword + '%')).limit(100).all()
 
         return keyword_list
+
+    def category_list_query(self, category):
+
+        '''
+        category = str(
+            feat_session.query(
+                CategoryTable.CategoryID
+            ).order_by(
+                func.rand()
+            ).limit(1).scalar()
+        )
+        '''
+
+        category_list = feat_session.query(
+            func.rank().over(order_by=ProcessedInfoTable.Real_Influence.desc()).label('Rank'),
+            CategoryTable.Category,
+            RawInfoTable.Username,
+            RawInfoTable.Followers,
+            ProcessedInfoTable.Real_Influence
+        ).outerjoin(
+            ProcessedInfoTable,
+            ProcessedInfoTable.Username == RawInfoTable.Username
+        ).outerjoin(
+            CategoryTable,
+            CategoryTable.CategoryID == RawInfoTable.CategoryID
+        ).filter(CategoryTable.CategoryID == category).limit(5).all()
+
+        return category_list
