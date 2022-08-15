@@ -64,8 +64,8 @@ def get_detailed_info(influencer_id):
     return response
 
 
-def get_category_list():
-    category_list = query.category_list_query()
+def get_category_list(category):
+    category_list = query.category_list_query(category)
 
     response = dto.to_json(category_list)
 
