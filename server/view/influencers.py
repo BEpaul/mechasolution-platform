@@ -36,9 +36,17 @@ async def detailed_info(influencer_id: str):
     return response
 
 
-@router.get("/rank/{category}")
+@router.get("/rank/golf")
+async def category_list_golf():
+
+    response = controller.get_category_list("3")
+
+    return response
+
+
+@router.get("/rank/light")
 async def category_list():
-    response = controller.get_category_list()
+    response = controller.get_category_list("1")
 
     return response
 
