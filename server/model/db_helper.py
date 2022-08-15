@@ -52,9 +52,7 @@ class db_helper:
 
         return all_data
 
-    def category_list_query(self):
-
-        category = str(feat_session.query(CategoryTable.CategoryID).order_by(func.rand()).limit(1).scalar())
+    def category_list_query(self, category):
 
         category_list = feat_session.query(
             CategoryTable.Category,
