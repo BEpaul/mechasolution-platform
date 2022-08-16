@@ -12,30 +12,44 @@ user_session = user_engine.sessionmaker()
 
 class db_helper:
     def attention_list_query(self):
-        attention_list = user_session.query(attentionTable).limit(100).all()
+        attention_list = user_session.query(
+            attentionTable
+        ).limit(10).all()
 
         return attention_list
 
     def post_attention_list(self, influencer_id):
+        check_size = user_session.query(attentionTable).count() + 1
+
+        print(check_size)
+
+        if check_size >= 5:
+            raise HTTPException(status_code=202, detail="Attention list is full.")
+
         influencer = feat_session.query(
             RawInfoTable.Username,
+            CategoryTable.Category,
             RawInfoTable.Followers,
             ProcessedInfoTable.Real_Influence
         ).outerjoin(
             ProcessedInfoTable,
             RawInfoTable.Username == ProcessedInfoTable.Username
+        ).outerjoin(
+            CategoryTable,
+            CategoryTable.CategoryID == RawInfoTable.CategoryID
         ).filter(RawInfoTable.Username == influencer_id).first()
 
         if not influencer:
             raise HTTPException(status_code=202, detail="No such influencer exist.")
 
         add_influencer = attentionTable(
-            influencer_id=influencer.Username,
-            followers=influencer.Followers,
-            real_influence=influencer.Real_Influence
+            Influencer_id=influencer.Username,
+            Category = influencer.Category,
+            Followers=influencer.Followers,
+            Real_Influence=influencer.Real_Influence
         )
 
-        check_influencer = user_session.get(attentionTable, add_influencer.influencer_id)
+        check_influencer = user_session.get(attentionTable, add_influencer.Influencer_id)
 
         if check_influencer:
             raise HTTPException(status_code=202, detail="Already added.")
@@ -47,12 +61,12 @@ class db_helper:
         except:
             user_session.rollback()
 
-    def delete_user(self, influencer_id):
+    def delete_user(self, Influencer_id):
 
-        influencer = user_session.get(attentionTable, influencer_id)
+        influencer = user_session.get(attentionTable, Influencer_id)
 
         if not influencer:
-            raise HTTPException(status_code=404, detail="Influencer not found")
+            raise HTTPException(status_code=202, detail="Influencer not found")
 
         user_session.delete(influencer)
 
