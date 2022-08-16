@@ -58,7 +58,7 @@ function InfluencerDetailPage() {
             </Col>
             <Col span={2} />
             <Col span={11}>
-              <GridCards title='내 영향력' content={<PowerChart data={data}/>} />
+              <GridCards title='내 영향력' content={<PowerChart/>} />
             </Col>
           </Row>
         </MainBody>

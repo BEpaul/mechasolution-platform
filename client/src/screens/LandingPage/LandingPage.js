@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
-import TableInterest from '../../components/tables/TableInterest';
 import { Button } from 'antd';
-import APICollection from '../../api/APICollection';
 import ImageBox from '../../components/commons/ImageBox'
 
 function LandingPage() {
-
-  let APICol = new APICollection();
 
   const navigate = useNavigate();
 
@@ -52,10 +48,7 @@ function LandingPage() {
             </form>
           </div>
           <br />
-          {/* <div> */}
           <ImageBox />
-          {/* {visible && <TableInterest data={data} isLoginCheck={true} />} */}
-          {/* </div> */}
         </MainHeader>
       </Header>
     </Container>

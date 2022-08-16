@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState }from 'react'
 import TableInterest from '../../components/tables/TableInterest'
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
 import { dummyDataObject } from '../../assets/dummyDataObject';
+import APICollection from '../../api/APICollection';
 
 function InterestPage() {
+
+  let APICol = new APICollection();
+
+  const [data, setData] = useState()
+  useEffect(() => {
+    APICol.AttentionList().then(response => {
+      console.log(response.data);
+      setData(response.data);
+    })
+  }, [])
+
   return (
     <div>
       <Container>
@@ -15,7 +27,7 @@ function InterestPage() {
               </div>
               <br />
               <div>
-                <TableInterest data={dummyDataObject} style={{width: 800}} />
+                <TableInterest data={data} style={{width: 800}} />
               </div>
           </MainHeader>
         </Header>

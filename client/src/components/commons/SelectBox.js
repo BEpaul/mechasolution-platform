@@ -13,12 +13,12 @@ const { Option } = Select;
         onChange={props.onChange}
       >
         <Option value=''>{props.defaultValue}</Option>        
-        <Option value={props.option1}>{props.option1}</Option>
-        <Option value={props.option2}>{props.option2}</Option>
-        <Option value={props.option3}>{props.option3}</Option>
-        <Option value={props.option4}>{props.option4}</Option>
-        <Option value={props.option5}>{props.option5}</Option>
-        <Option value={props.option6}>{props.option6}</Option>
+        <Option value='all'>{props.option1}</Option>
+        <Option value='nano'>{props.option2}</Option>
+        <Option value='micro'>{props.option3}</Option>
+        <Option value='mid'>{props.option4}</Option>
+        <Option value='macro'>{props.option5}</Option>
+        <Option value='mega'>{props.option6}</Option>
       </Select>
     </>
   );

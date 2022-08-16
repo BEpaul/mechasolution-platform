@@ -14,7 +14,7 @@ export default function App(props) {
   return (
     <LineChart
       width={650}
-      height={350}
+      height={370}
       data={props.data}
       margin={{
         top: 5,
@@ -25,9 +25,8 @@ export default function App(props) {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
-      <YAxis />
+      <YAxis type="percent"/>
       <Tooltip />
-      <Legend />
       <Line
         type="monotone"
         dataKey="pv"

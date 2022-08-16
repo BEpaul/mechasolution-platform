@@ -1,6 +1,6 @@
 import TableCategoryRanking from '../../components/tables/TableCategoryRanking';
 import TableSearch from '../../components/tables/TableSearch';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GridCards from '../../components/commons/GridCards';
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
@@ -29,19 +29,40 @@ function RankingPage() {
 
   const [visible, setvisible] = useState(false);
 
+  // 랭킹페이지 렌더링 시 카테고리별 랭킹
+  useEffect(() => {
+    APICol.CategoryRanking('light').then((response) => {
+      console.log(response.data);
+      setCampingData(response.data);
+
+    APICol.CategoryRanking('golf').then((response) => {
+      console.log(response.data);
+      setGolfData(response.data);
+    })
+
+    })
+  }, [])
+  
+
+
   const onClickHandler = (event) => {
     event.preventDefault();
-    console.log('입력값', Keyword)
+    console.log('입력값', Keyword);
+
+    // 키워드에 빈값을 넣었을 때
+    // if(event.target.value === '') {
+    //   alert('값을 입력해주세요.');
+    //   window.location.replace('/search');
+    // }
 
     // 해시태그 및 키워드 검색
     APICol.SearchKeyword(Keyword).then((response) => {
-      console.log(response.data)
+      console.log(response.data);
       setData(response.data);
       setvisible(true);
     }).catch(error => {
-      console(error.response)
+      console(error.response);
     });
-
   }
 
   return (
@@ -65,11 +86,11 @@ function RankingPage() {
         <MainBody>
           <Row>
             <Col span={11}>
-              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={data} />} />
+              <GridCards title='인스타그램 캠핑 카테고리' content={<TableCategoryRanking data={campingData} />} />
             </Col>
             <Col span={2} />
             <Col span={11}>
-              <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={data} />} />
+              <GridCards title='인스타그램 골프 카테고리' content={<TableCategoryRanking data={golfData} />} />
             </Col>
           </Row>
         </MainBody>

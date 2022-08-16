@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { Container } from '../../components/styles/container/Container';
 import { Header, MainHeader } from '../../components/styles/header/Header.styled';
 import SelectBox from '../../components/commons/SelectBox';
+import SelectBoxCategory from '../../components/commons/SelectBoxCategory'
 import { Button } from 'antd';
-import TableSearch from '../../components/tables/TableSearch'
-import { dummyDataObject } from '../../assets/dummyDataObject';
+import TableSearch from '../../components/tables/TableSearch';
 import axios from 'axios';
 
 function SearchPage() {
 
   const [OptionFollowerValue, setOptionFollowerValue] = useState('')
   const [OptionCategoryValue, setOptionCategoryValue] = useState('')
+
+  const [data, setData] = useState([])
 
   const handleFollowerChange = (value) => {
     console.log(`selected ${value}`);
@@ -29,7 +31,7 @@ function SearchPage() {
     console.log("카테고리 옵션", OptionCategoryValue);
 
     // 필터링 api 메소드
-    axios.get(`http://192.168.0.15:5000/api/v1/influencers/rank/${OptionFollowerValue}/${OptionCategoryValue}`
+    axios.get(`http://localhost:8000/api/v1/influencers/rank/${OptionFollowerValue}/${OptionCategoryValue}`
     // {
     //   params: {
     //     followers: OptionFollowerValue,
@@ -37,9 +39,10 @@ function SearchPage() {
     //   }
     // }
     ).then(response => {
-      console.log(response.data)
+      console.log(response.data);
+      setData(response.data);
     }).catch(error => {
-      console.log(error.response)
+      console.log(error.response);
     })
 
     // 카테고리별 순위 리스트
@@ -60,15 +63,15 @@ function SearchPage() {
           <div style={{ padding: 15, textAlign: 'center' }}>
             <SelectBox
               defaultValue='팔로워 수'
-              option1='all'
-              option2='nano'
-              option3='micro'
-              option4='mid'
-              option5='macro'
-              option6='mega'
+              option1='제한 없음'
+              option2='1K ~ 10K'
+              option3='10K ~ 50K'
+              option4='50K ~ 100K'
+              option5='100K ~ 500K'
+              option6='500K ~'
               onChange={handleFollowerChange}
             />
-            <SelectBox
+            <SelectBoxCategory
               defaultValue='카테고리'
               option1='골프'
               option2='조명'
@@ -89,7 +92,7 @@ function SearchPage() {
           </div>
 
           <div>
-            {/* <TableSearch data={dummyDataObject} /> */}
+            <TableSearch data={data} />
           </div>
         </MainHeader>
 
