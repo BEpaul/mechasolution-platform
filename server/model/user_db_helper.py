@@ -19,7 +19,7 @@ class db_helper:
         return attention_list
 
     def post_attention_list(self, influencer_id):
-        check_size = user_session.query(attentionTable).count() + 1
+        check_size = user_session.query(attentionTable).count()
 
         print(check_size)
 

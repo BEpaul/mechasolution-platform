@@ -46,7 +46,7 @@ async def category_list_golf():
 
 @router.get("/rank/light")
 async def category_list():
-    response = controller.get_category_list("1")
+    response = controller.get_category_list("2")
 
     return response
 

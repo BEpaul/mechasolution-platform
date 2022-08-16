@@ -68,7 +68,7 @@ class db_helper:
         keyword_list = feat_session.query(
             func.rank().over(order_by=ProcessedInfoTable.Real_Influence.desc()).label('Rank'),
             RawInfoTable.Username,
-            KeywordTable.Keyword,
+            CategoryTable.Category,
             RawInfoTable.Followers,
             ProcessedInfoTable.Real_Influence
         ).outerjoin(
@@ -77,6 +77,9 @@ class db_helper:
         ).outerjoin(
             KeywordTable,
             KeywordTable.KeywordID == RawInfoTable.KeywordID
+        ).outerjoin(
+            CategoryTable,
+            CategoryTable.CategoryID == RawInfoTable.CategoryID
         ).filter(KeywordTable.Keyword.like('%' + keyword + '%')).limit(100).all()
 
         return keyword_list

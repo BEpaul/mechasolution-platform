@@ -23,6 +23,6 @@ def start_application():
     return app
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", reload=True, port=5000, host='192.168.0.15')
+    uvicorn.run("main:app", reload=True)
 
 app = start_application()
