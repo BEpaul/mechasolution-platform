@@ -39,7 +39,7 @@ const columns = [
         key={columns[0].key}
         onClick={()=> {
             console.log('키', record.Username);
-            axios.post(`http://localhost:8000/api/v1/attention/${record.Username}`)
+            axios.post(`http://3.37.135.96:80/api/v1/attention/${record.Username}`)
             .then(response => {
               console.log('메세지',response.data);
 

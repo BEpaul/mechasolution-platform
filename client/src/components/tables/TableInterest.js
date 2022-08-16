@@ -40,7 +40,7 @@ const columns = [
         <Button 
         type='primary'
         onClick={() => {
-          axios.delete(`http://localhost:8000/api/v1/attention/${record.Influencer_id}`)
+          axios.delete(`http://3.37.135.96:80/api/v1/attention/${record.Influencer_id}`)
           alert('삭제되었습니다');
           window.location.replace('/interest');
         }}

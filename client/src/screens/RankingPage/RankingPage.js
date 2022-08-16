@@ -31,7 +31,7 @@ function SearchPage() {
     console.log("카테고리 옵션", OptionCategoryValue);
 
     // 필터링 api 메소드
-    axios.get(`http://localhost:8000/api/v1/influencers/rank/${OptionFollowerValue}/${OptionCategoryValue}`
+    axios.get(`http://3.37.135.96:80/api/v1/influencers/rank/${OptionFollowerValue}/${OptionCategoryValue}`
     // {
     //   params: {
     //     followers: OptionFollowerValue,
