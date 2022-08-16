@@ -56,9 +56,10 @@ class ProcessedInfoTable(Base):
 class attentionTable(Base):
     __tablename__ = 'attention'
     # target table name inside the accessed db
-    influencer_id = Column(String(100), primary_key=True)
-    followers = Column(Integer, nullable=False)
-    real_influence = Column(Integer)
+    Influencer_id = Column(String(100), primary_key=True)
+    Category = Column(String(20))
+    Followers = Column(Integer, nullable=False)
+    Real_Influence = Column(Integer)
 
     #    choices = relationship('choice', back_populates='test')
 
