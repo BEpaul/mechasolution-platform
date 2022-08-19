@@ -1,0 +1,20 @@
+[
+   {
+    "key": 1,
+    "influencer": "아이유",
+    "category": "연예",
+    "power": "15,239,228"
+  },
+  {
+    "key": 2,
+    "influencer": "홍길동",
+    "category": "연예",
+    "power": "964,228"
+  },
+  {
+    "key": 3,
+    "influencer": "치킨",
+    "category": "연예",
+    "power": "891,024"
+  }
+]
