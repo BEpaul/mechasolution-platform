@@ -34,7 +34,7 @@ class Featuring:
     #selenium으로 로그인
     def login(self, username, password):
         link = "https://featuring.co/accounts/login/"
-        my_driver = "C:/Users/82105/.vscode/vsWorkspace/FeaturingCrawler/chromedriver.exe"
+        my_driver = ""
 
         #options = webdriver.ChromeOptions()
         #options.add_argument("headless")
@@ -223,7 +223,7 @@ while(True):
 
     df_user.dropna(inplace=True)
 
-    engine = create_engine("mysql+pymysql://admin:" + "apzk1234" + "@database-1.crjx3ubi7qng.ap-northeast-2.rds.amazonaws.com:3306/" + "featdb?charset=utf8")
+    engine = create_engine("")
 
     conn = engine.connect()
 
@@ -270,7 +270,7 @@ while(True):
 
     df1.dropna(inplace=True)
 
-    engine = create_engine("mysql+pymysql://admin:" + "apzk1234" + "@database-1.crjx3ubi7qng.ap-northeast-2.rds.amazonaws.com:3306/" + "testdb?charset=utf8")
+    engine = create_engine("mysql+pymysql://admin:")
 
     conn = engine.connect()
 
