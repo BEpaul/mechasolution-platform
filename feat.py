@@ -174,8 +174,8 @@ class Featuring:
 
 
 
-username = "roboholic84@gmail.com"
-password = "mecha@1234"
+username = ""
+password = ""
 
 featuring = Featuring()
 featuring.login(username, password)
